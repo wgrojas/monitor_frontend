@@ -83,7 +83,7 @@ function App() {
 
   return (
     <div className="container mt-4">
-      <h2 className="text-center">🌐 Monitor de Redes - Tiempo Real</h2>
+    <h2 className="text-center">🌐 Monitor de Redes - \n con Notificaciones a Telegram en Tiempo Real</h2>
 
       {/* Mensaje de conexión */}
       {!conexionOk && (
