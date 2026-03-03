@@ -23,7 +23,9 @@ ChartJS.register(
   Legend
 );
 
-const API = "https://netmonitor-76a5279b8bdd.herokuapp.com"; // Cambia aquí si tu backend tiene otra URL
+const API="https://monitor-backend-3425c25c5e0a.herokuapp.com/"//Proyecto montado en Git
+
+//const API = "https://netmonitor-76a5279b8bdd.herokuapp.com"; // Cambia aquí si tu backend tiene otra URL
 const MAX_LATENCIAS = 20;
 
 // Terminales por defecto si no hay conexión
