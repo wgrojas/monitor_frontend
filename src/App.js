@@ -10,7 +10,7 @@ import {
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 } from "chart.js";
 
 ChartJS.register(
@@ -20,10 +20,10 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
- const API  =  "https://monitor-backend-3425c25c5e0a.herokuapp.com"//Proyecto montado en Git
+const API = "https://monitor-backend-3425c25c5e0a.herokuapp.com"; //Proyecto montado en Git
 
 //const API = "https://netmonitor-76a5279b8bdd.herokuapp.com"; // Cambia aquí si tu backend tiene otra URL
 const MAX_LATENCIAS = 20;
@@ -36,7 +36,6 @@ const TERMINALES_DEFAULT = [
   { nombre: "", ip: "", estado: "NO CONEXIÓN" },
   { nombre: "", ip: "", estado: "NO CONEXIÓN" },
   { nombre: "", ip: "", estado: "NO CONEXIÓN" },
-  
 ];
 
 function App() {
@@ -65,7 +64,6 @@ function App() {
         }
       }
       setLatencias(nuevasLatencias);
-
     } catch (error) {
       // Mostrar error de conexión general al backend
       console.error("Error cargando datos del backend:", error);
@@ -83,7 +81,9 @@ function App() {
 
   return (
     <div className="container mt-4">
-    <h2 className="text-center">🌐 Monitor de Redes - \n con Notificaciones a Telegram en Tiempo Real</h2>
+      <h2 className="text-center">
+        🌐 Monitor de Redes - con Notificaciones a Telegram en Tiempo Real
+      </h2>
 
       {/* Mensaje de conexión */}
       {!conexionOk && (
@@ -102,7 +102,7 @@ function App() {
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
           justifyItems: "center",
-          gap: "20px"
+          gap: "20px",
         }}
       >
         {estado.map((item, index) => {
@@ -130,10 +130,14 @@ function App() {
                   textAlign: "center",
                   padding: "10px",
                   boxShadow: "0 0 10px rgba(0,0,0,0.2)",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
-                onMouseEnter={e => (e.currentTarget.style.transform = "scale(1.05)")}
-                onMouseLeave={e => (e.currentTarget.style.transform = "scale(1)")}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.transform = "scale(1.05)")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.transform = "scale(1)")
+                }
                 title={`IP: ${item.ip || "N/A"}`}
               >
                 <span style={{ fontSize: "16px", fontWeight: "bold" }}>
@@ -162,26 +166,26 @@ function App() {
             );
 
           const chartData = {
-            labels: data.map(d => {
+            labels: data.map((d) => {
               const fechaUTC = new Date(d.timestamp + "Z"); // Forzar UTC
               return fechaUTC.toLocaleTimeString("es-CO", {
                 timeZone: "America/Bogota",
                 hour12: false,
                 hour: "2-digit",
                 minute: "2-digit",
-                second: "2-digit"
+                second: "2-digit",
               });
             }),
             datasets: [
               {
                 label: `${terminal} (ms)`,
-                data: data.map(d => d.latencia),
+                data: data.map((d) => d.latencia),
                 borderColor: "#007bff",
                 backgroundColor: "rgba(0,123,255,0.2)",
                 tension: 0.3,
-                fill: true
-              }
-            ]
+                fill: true,
+              },
+            ],
           };
 
           return (
@@ -194,23 +198,23 @@ function App() {
                   plugins: {
                     tooltip: {
                       callbacks: {
-                        label: ctx => {
+                        label: (ctx) => {
                           const ip =
-                            estado.find(e => e.nombre === terminal)?.ip || "";
+                            estado.find((e) => e.nombre === terminal)?.ip || "";
                           return `Latencia: ${ctx.raw} ms - IP: ${ip}`;
-                        }
-                      }
-                    }
+                        },
+                      },
+                    },
                   },
                   scales: {
                     y: {
                       beginAtZero: true,
-                      title: { display: true, text: "Latencia (ms)" }
+                      title: { display: true, text: "Latencia (ms)" },
                     },
                     x: {
-                      title: { display: true, text: "Hora (Colombia)" }
-                    }
-                  }
+                      title: { display: true, text: "Hora (Colombia)" },
+                    },
+                  },
                 }}
               />
             </div>
