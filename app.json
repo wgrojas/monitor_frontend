@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "eef6c086-3c07-43eb-bb72-bca2b332d934"
+      }
+    },
+    "android": {
+      "package": "com.wilmarrojas.monitorfrontend"
+    }
+  }
+}

@@ -23,18 +23,18 @@ ChartJS.register(
   Legend
 );
 
-const API = "https://netmonitor-76a5279b8bdd.herokuapp.com/"; // Cambia aquí si tu backend tiene otra URL
+const API = "https://netmonitor-c0b3d8c31833.herokuapp.com";
 const MAX_LATENCIAS = 20;
 
 // Terminales por defecto si no hay conexión
 const TERMINALES_DEFAULT = [
-  { nombre: "", ip: "", estado: "NO CONEXIÓN" },
-  { nombre: "", ip: "", estado: "NO CONEXIÓN" },
-  { nombre: "", ip: "", estado: "NO CONEXIÓN" },
-  { nombre: "", ip: "", estado: "NO CONEXIÓN" },
-  { nombre: "", ip: "", estado: "NO CONEXIÓN" },
-  { nombre: "", ip: "", estado: "NO CONEXIÓN" },
-  
+  { nombre: "Terminal Giron canal 1", ip: "", estado: "NO CONEXIÓN" },
+  { nombre: "Terminal Giron canal 2", ip: "", estado: "NO CONEXIÓN" },
+  { nombre: "Bodega Giron canal 1", ip: "", estado: "NO CONEXIÓN" },
+  { nombre: "Bodega Giron canal 2", ip: "", estado: "NO CONEXIÓN" },
+  { nombre: "San Andres", ip: "", estado: "NO CONEXIÓN" },
+  { nombre: "Terminal Cucuta canal 1", ip: "", estado: "NO CONEXIÓN" },
+  { nombre: "Terminal Cucuta canal 2", ip: "", estado: "NO CONEXIÓN" }
 ];
 
 function App() {
@@ -56,17 +56,12 @@ function App() {
           nuevasLatencias[item.nombre] = Array.isArray(res.data)
             ? res.data.slice(-MAX_LATENCIAS)
             : [];
-        } catch (error) {
-          // Mostrar error de cada terminal
-          console.error(`Error cargando latencia de ${item.nombre}:`, error);
+        } catch {
           nuevasLatencias[item.nombre] = [];
         }
       }
       setLatencias(nuevasLatencias);
-
     } catch (error) {
-      // Mostrar error de conexión general al backend
-      console.error("Error cargando datos del backend:", error);
       setEstado(TERMINALES_DEFAULT);
       setLatencias({});
       setConexionOk(false);
@@ -217,6 +212,9 @@ function App() {
       </div>
     </div>
   );
+
+
 }
+
 
 export default App;
